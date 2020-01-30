@@ -6,7 +6,6 @@ import TYPES from "../../config/containerType";
 import containerconfig from "../../config/containerconfig"
 
 import iregistrationuiservice from "../../uiservice/interface/iregistrationuiservice";
-import { wait } from '@testing-library/dom';
 
 
 @injectable()
@@ -28,19 +27,15 @@ export default class Edit extends Component<any,any> {
   componentDidMount() {
       debugger;
    let iregn = containerconfig.get<iregistrationuiservice>(TYPES.iregistrationuiservice);
-    const output = iregn.getbyId(this.props.match.params.id)
-                        .then((response:any)=>{
+    iregn.getbyId(this.props.match.params.id)
+         .then((response:any)=>{
         debugger;
-        this.setState({person_name: response.data._name,
-            business_name: response.data._code,
-            business_gst_number:response.data._id });
+        this.setState({person_name: response.Name,
+            business_name: response.Code,
+            business_gst_number:response.Id });
         }
     )
-    debugger;
-    // this.setState({person_name: output._name,
-    // business_name: output._code,
-    // business_gst_number:output._id });
-     }
+  }
 
   onChangePersonName(e:any) {
     this.setState({
